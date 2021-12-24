@@ -20,5 +20,5 @@ GPIO.setup(LED, GPIO.OUT)
 while True:
  ledState = not ledState
  GPIO.output(LED, ledState)
- time.sleep(0.5)
+ time.sleep(2)
 
