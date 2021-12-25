@@ -14,3 +14,8 @@ The 2 resistors are used to reduce the voltage of the Echo signal from 5V to 3.3
 Connecting the Echo pin directly to a GPIO pin (provided for 3.3V) could damage it.  
 We do this on the basis of the “Voltage divider” principle.
 
+# LCD_display
+
+https://en.wikipedia.org/wiki/Liquid-crystal_display
+
+https://github.com/dhylands/python_lcd/tree/master/lcd
