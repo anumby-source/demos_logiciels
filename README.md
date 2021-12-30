@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=ui6FnmLvc8g
 Config
 https://www.youtube.com/watch?v=SjTNyX5WyxM
 SSH
-https://www.youtube.com/watch?v=Xl1dR8Bdx2U
+https://www.youtube.com/watch?v=Xl1dR8Bdx2U=
 GPIO
 https://www.youtube.com/watch?v=4hWG9X6kstY
 Conversion A/N
