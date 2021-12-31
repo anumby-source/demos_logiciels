@@ -16,6 +16,6 @@ thermistor = 29
 GPIO.setup(thermistor, GPIO.IN)
 
 while True:
- t = GPIO.IN(thermistor)
+ t = GPIO.input(thermistor)
  print(t)
 

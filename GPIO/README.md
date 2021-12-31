@@ -19,3 +19,6 @@ We do this on the basis of the “Voltage divider” principle.
 https://en.wikipedia.org/wiki/Liquid-crystal_display
 
 https://github.com/dhylands/python_lcd/tree/master/lcd
+
+...
+
