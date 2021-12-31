@@ -15,3 +15,6 @@ Serial
 https://www.youtube.com/watch?v=L8iBZKWP5wU
 WEB
 https://www.youtube.com/watch?v=a6HfREdNJ3I
+
+OpenVINO
+https://docs.openvino.ai/latest/index.html
