@@ -31,4 +31,9 @@ https://www.hackster.io/314reactor/artificial-life-project-b96bba#overview
 
 Minecraft
 https://www.minecraft.net/en-us/edition/pi
+https://minecraft.makecode.com/tutorials
+https://coderdojotc.readthedocs.io/projects/python-minecraft/en/latest/classroom/index.html
+
+
+https://www.stuffaboutcode.com/p/raspberry-pi.html
 
