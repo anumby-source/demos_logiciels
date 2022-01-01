@@ -18,3 +18,17 @@ https://www.youtube.com/watch?v=a6HfREdNJ3I
 
 OpenVINO
 https://docs.openvino.ai/latest/index.html
+
+caméra
+https://www.framboise314.fr/docs/Essentials_Camera_v1.pdf
+
+Framboise314
+https://www.framboise314.fr/publications-revues-magazines-livres-e-books-et-articles-sur-le-raspberry-pi/the-magpi/
+
+AI
+https://github.com/matpalm/bnn
+https://www.hackster.io/314reactor/artificial-life-project-b96bba#overview
+
+Minecraft
+https://www.minecraft.net/en-us/edition/pi
+
