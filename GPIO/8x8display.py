@@ -31,10 +31,12 @@ def get_row_column(led):
 
 
 def setup_gpio():
+    global SETUP
+    
     for negative in LED_column_gpio:
-        IO.setup(negative, GPIO.OUT)
+        GPIO.setup(negative, GPIO.OUT)
     for positive in LED_row_gpio:
-        IO.setup(positive, GPIO.OUT)
+        GPIO.setup(positive, GPIO.OUT)
     SETUP = True
         
         
@@ -44,6 +46,8 @@ def led_on(led):
     column = (led - 1) % 8
     negative = LED_column_gpio[column]
     if SETUP:
+       GPIO.output(positive, 0)  # if bit0 of 8bit 'pin' is true pull PIN21 low
+       print("neg=", negative, "pos=", positive)
        GPIO.output(negative, 0)  # if bit0 of 8bit 'pin' is true pull PIN21 low
        GPIO.output(positive, 1)  # if bit0 of 8bit 'pin' is true pull PIN21 low
     return positive, negative
@@ -112,11 +116,23 @@ def setup_letter_leds():
 
 
 if __name__ == '__main__':
+    setup_gpio()
+    
+    for i in range(1000):
+        led_on(1)
+        time.sleep(1.0)
+        led_on(10)
+        time.sleep(1.0)
+    
+    exit()
+    
     for led in [1, 8, 9, 64]:
         # rc = get_row_column(led)
         rc = led_on(led)
         print(led, rc)
         time.sleep(1.0)
+        
+def dummy():
 
     leds = leds_letter(A)
     # print(leds)
