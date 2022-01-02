@@ -20,5 +20,9 @@ https://en.wikipedia.org/wiki/Liquid-crystal_display
 
 https://github.com/dhylands/python_lcd/tree/master/lcd
 
+# 8x8 display
+
+
+
 ...
 
