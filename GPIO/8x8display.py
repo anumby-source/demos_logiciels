@@ -16,11 +16,13 @@ LED_column_gpio = [12, 22, 27, 25, 17, 24, 23, 18]
 LED_row_pin =  [ 9, 14,  8, 12,  1,  7,  2, 5]
 LED_row_gpio = [21, 20, 26, 16, 19, 13,  6, 5]
 
-# GPIO connections
-
-
 SETUP = False
 
+
+# led sont numérotées 1 .. 8 9 .. 16 .... .. 64
+#  avec rows   = 1 .. 8
+#       column = 1 .. 8
+# donc led = row * 8 + column + 1
 def get_row_column(led):
     row = int((led - 1) / 8)
     positive = LED_row_gpio[row]
@@ -33,6 +35,8 @@ def get_row_column(led):
     return row+1, column+1, positive, negative, row_pin, column_pin
 
 
+# les colonnes sont en logique négative
+# les lignes sont en logique positive
 def setup_gpio():
     global SETUP
     
@@ -55,6 +59,9 @@ def clear():
              GPIO.output(negative, 1)  # if bit0 of 8bit 'pin' is true pull PIN21 low
 
         
+# pour allumer une LED:
+#  on éteint tous les row sauf le row de la LED choisie  (logique positive)
+#  on éteint tous les column sauf la column de la LED choisie  (logique négative)
 def led_on(led):
     row = int((led - 1) / 8)
     column = (led - 1) % 8
@@ -76,15 +83,16 @@ def led_on(led):
                GPIO.output(negative, 1)
 
 
+# allumage d'une liste de LEDs
 def leds_on(leds):
-    for t in range(1000):
+    for t in range(100):
         for led in leds:
             #clear()
             led_on(led)
             time.sleep(0.00005)
 
 
-# value of pin in each port
+# codage binaire des images pour les lettres de l'alphabet
 A = [0, 0b01111111, 0b11111111, 0b11001100, 0b11001100, 0b11001100, 0b11111111, 0b01111111]
 B = [0, 0b00111100, 0b01111110, 0b11011011, 0b11011011, 0b11011011, 0b11111111, 0b11111111]
 C = [0, 0b11000011, 0b11000011, 0b11000011, 0b11000011, 0b11100111, 0b01111110, 0b00111100]
@@ -113,6 +121,7 @@ Y = [0b01000000, 0b11100000, 0b01110000, 0b00111111, 0b00111111, 0b01110000, 0b1
 Z = [0b11000011, 0b11100011, 0b11110011, 0b11111011, 0b11011111, 0b11001111, 0b11000111, 0b11000011]
 
 
+# équivalence en LEDs pour les lettres de l'alphabet
 def leds_letter(letter):
     leds = []
     # print("letter={} ".format(letter))
@@ -130,6 +139,7 @@ def leds_letter(letter):
     return leds
             
             
+# initialisation des données pour les lettres de l'alphabet
 def setup_letter_leds():
     letter_array = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z]
     letter_leds = []
@@ -140,19 +150,31 @@ def setup_letter_leds():
     return letter_leds
 
 
-if __name__ == '__main__':
-    setup_gpio()
+# montre les lettres sur le display
+def show_letters():
+    letter_leds = setup_letter_leds()
+    # print(leds)
     
+    for letter in letter_leds:
+        print(letter)
+        leds_on(letter)
+        time.sleep(1)
+        
+            
+            
+# montre scanne toutes LEDs individuelles sur le display
+def show_individual_leds():
     n = 8
     while True:
         for r in range(n):
             for c in range(n):
-               led = r*8 + c + 1
-               led_on(led)
-               time.sleep(0.1)
-           
-    exit()
-            
+                led = r*8 + c + 1
+                led_on(led)
+                time.sleep(0.1)
+
+
+def show_random_leds():
+    n = 8
     for i in range(10):
         leds = []
         for led in range(random.randint(0, n*n)):
@@ -164,26 +186,9 @@ if __name__ == '__main__':
         print(leds)
         leds_on(leds)
         time.sleep(1.0)
-        #clear()
-    
-    #exit()
-    
-    for led in [1, 8, 9, 64]:
-        # rc = get_row_column(led)
-        rc = led_on(led)
-        print(led, rc)
-        time.sleep(1.0)
-        
-def dummy():
 
-    leds = leds_letter(A)
-    # print(leds)
-    
-    leds = setup_letter_leds()
-    # print(leds)
-    
-    for letter_leds in leds:
-        print(letter_leds)
-        for y in range(100):
-            leds_on(letter_leds)
-    
+            
+if __name__ == '__main__':
+    setup_gpio()
+    show_individual_leds()
+    #show_letters()
