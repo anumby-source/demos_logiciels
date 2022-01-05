@@ -143,7 +143,16 @@ def setup_letter_leds():
 if __name__ == '__main__':
     setup_gpio()
     
-    n = 4
+    n = 8
+    while True:
+        for r in range(n):
+            for c in range(n):
+               led = r*8 + c + 1
+               led_on(led)
+               time.sleep(0.1)
+           
+    exit()
+            
     for i in range(10):
         leds = []
         for led in range(random.randint(0, n*n)):
