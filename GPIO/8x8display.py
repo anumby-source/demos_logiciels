@@ -1,6 +1,7 @@
 # working
 import RPi.GPIO as GPIO
 import time  # calling for time to provide delays in program
+import random
 
 GPIO.setwarnings(False)  # do not show any warnings
 x = 1
@@ -9,12 +10,14 @@ y = 1
 GPIO.setmode(GPIO.BCM)  # programming the GPIO by BCM pin numbers. (like PIN29 as'GPIO5')
 
 # pins of the 8x8 display
-LED_column_pin = [13, 3, 4, 10, 6, 11, 15, 16]
-LED_row_pin = [9, 14, 8, 12, 1, 7, 2, 5]
+LED_column_pin =  [13,  3,  4, 10,  6, 11, 15, 16]
+LED_column_gpio = [12, 22, 27, 25, 17, 24, 23, 18]
+
+LED_row_pin =  [ 9, 14,  8, 12,  1,  7,  2, 5]
+LED_row_gpio = [21, 20, 26, 16, 19, 13,  6, 5]
 
 # GPIO connections
-LED_column_gpio = [12, 22, 27, 25, 17, 24, 23, 18]
-LED_row_gpio = [21, 20, 26, 16, 19, 13, 6, 5]
+
 
 SETUP = False
 
@@ -38,25 +41,47 @@ def setup_gpio():
     for positive in LED_row_gpio:
         GPIO.setup(positive, GPIO.OUT)
     SETUP = True
-        
+
+
+def clear():
+    if SETUP:
+        for row in range(8):
+             #for column in range(8):
+             column=row
+             positive = LED_row_gpio[row]
+             negative = LED_column_gpio[column]
+             #print("clear> neg=", negative, "pos=", positive)
+             GPIO.output(positive, 0)  # if bit0 of 8bit 'pin' is true pull PIN21 low
+             GPIO.output(negative, 1)  # if bit0 of 8bit 'pin' is true pull PIN21 low
+
         
 def led_on(led):
     row = int((led - 1) / 8)
-    positive = LED_row_gpio[row]
     column = (led - 1) % 8
-    negative = LED_column_gpio[column]
-    if SETUP:
-       GPIO.output(positive, 0)  # if bit0 of 8bit 'pin' is true pull PIN21 low
-       print("neg=", negative, "pos=", positive)
-       GPIO.output(negative, 0)  # if bit0 of 8bit 'pin' is true pull PIN21 low
-       GPIO.output(positive, 1)  # if bit0 of 8bit 'pin' is true pull PIN21 low
-    return positive, negative
+    for rc in range(8):
+        positive = LED_row_gpio[rc]
+        if SETUP:
+           # print("column=", negative, "row=", positive)
+           if rc == row:
+               GPIO.output(positive, 1)
+           else:
+               GPIO.output(positive, 0)
+    for rc in range(8):
+        negative = LED_column_gpio[rc]
+        if SETUP:
+           # print("column=", negative, "row=", positive)
+           if rc == column:
+               GPIO.output(negative, 0)
+           else:
+               GPIO.output(negative, 1)
 
 
 def leds_on(leds):
-    for led in leds:
-        led_on(led)
-        time.sleep(0.0005)
+    for t in range(1000):
+        for led in leds:
+            #clear()
+            led_on(led)
+            time.sleep(0.00005)
 
 
 # value of pin in each port
@@ -118,13 +143,21 @@ def setup_letter_leds():
 if __name__ == '__main__':
     setup_gpio()
     
-    for i in range(1000):
-        led_on(1)
+    n = 4
+    for i in range(10):
+        leds = []
+        for led in range(random.randint(0, n*n)):
+           r = random.randint(0, n)
+           c = random.randint(0, n)
+           l = r*8 + c + 1
+           if l not in leds:
+               leds.append(l)
+        print(leds)
+        leds_on(leds)
         time.sleep(1.0)
-        led_on(10)
-        time.sleep(1.0)
+        #clear()
     
-    exit()
+    #exit()
     
     for led in [1, 8, 9, 64]:
         # rc = get_row_column(led)
