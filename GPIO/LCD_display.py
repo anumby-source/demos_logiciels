@@ -1,13 +1,22 @@
 
-from lcd_api import LcdApi
-from i2c_lcd import I2cLcd
+from signal import signal, SIGTERM, SIGHUP, pause
+from rpi_lcd import LCD
 
-I2C_ADDR = 0x27
-I2C_NUM_ROWS = 2
-I2C_NUM_COLS = 16
+lcd = LCD()
 
-lcd = I2cLcd(1, I2C_ADDR, I2C_NUM_ROWS, I2C_NUM_COLS)
+def safe_exit(signum, frame):
+    exit(1)
+    
+signal(SIGTERM, safe_exit)
+signal(SIGHUP, safe_exit)
 
-lcd.putstr("Great! It Works!")
-lcd.move_to(3, 1)
-lcd.putstr("freva.com")
+try:
+    lcd.text("Hello.", 1)
+    lcd.text("Raspberry Pi!", 2)
+    pause()
+    
+except KeyboardInterrupt:
+    pass
+finally:
+    lcd.clear()
+    
