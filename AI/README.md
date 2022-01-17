@@ -27,7 +27,6 @@ Démos
 Problèmes:
 - on doit changer la zone de stockage des fichiers temporaires car par défaut, il utilise un espace protégé
 - > set BUILD_FOLDER=%USERPROFILE%\Documents\Intel\OpenVINO
-  > set BUILD_FOLDER=c:\tmp\OpenVINO
 - corriger la version de MSBUILD pour utiliser la version actuelle
 - > if "!VS_MAJOR_VER!"=="17" set "MSBUILD_VERSION=17 2022"
 
@@ -45,4 +44,21 @@ classid probability label
 581     0.0019779   grille, radiator grille
 468     0.0014219   cab, hack, taxi, taxicab
 661     0.0008779   Model T
+
+
+- Je construis un script ~/vino.bat pour un setup automatique
+
+- deux mofications à apporter à tous les scripts de lancement des démos:
+
+  traitement d'un argument supplémentaire pour fournir un espace temporaire
+
+	if "%1"=="-temp" {
+        set BUILD_FOLDER=%2
+        echo Temp = %BUILD_FOLDER%
+		shift
+    }
+
+  support de MSBUILD 2022
+
+      if not "!MSBUILD_BIN:2022=!"=="!MSBUILD_BIN!" set "MSBUILD_VERSION=17 2022"
 
