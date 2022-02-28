@@ -35,4 +35,9 @@ Propose des exemples, des tutos pour des logiciels, des langages de programma(io
 # doc
 - [raspberry-pi](https://www.stuffaboutcode.com/p/raspberry-pi.html)
 
-https://user-images.githubusercontent.com/1872702/155948635-c6a6985a-da93-4779-ac04-7db92bb35047.mp4
+
+
+https://user-images.githubusercontent.com/1872702/155950805-84bd8556-c764-4d19-a28c-f1146ac5d1aa.mp4
+
+
+
