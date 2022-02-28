@@ -9,7 +9,7 @@ Propose des exemples, des tutos pour des logiciels, des langages de programma(io
 - [Serial](https://www.youtube.com/watch?v=L8iBZKWP5wU)
 - [WEB](https://www.youtube.com/watch?v=a6HfREdNJ3I)
 
-# OpenVIN(i
+# OpenVINO
 
 - [OpenVINO](https://docs.openvino.ai/latest/index.html)
 
@@ -32,6 +32,6 @@ Propose des exemples, des tutos pour des logiciels, des langages de programma(io
 - [2](https://minecraft.makecode.com/tutorials)
 - [3](https://coderdojotc.readthedocs.io/projects/python-minecraft/en/latest/classroom/index.html)
 
-
+# doc
 - [raspberry-pi](https://www.stuffaboutcode.com/p/raspberry-pi.html)
 
